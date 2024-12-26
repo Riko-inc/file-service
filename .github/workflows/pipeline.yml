@@ -12,7 +12,6 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
-
     services:
       postgres:
         image: postgres:latest
@@ -66,6 +65,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Clean port from some github thing that ruins ny build
+        run: sudo kill -9 $(sudo lsof -t -i:8084)
 
       - name: Build Docker Images
         run: docker compose build
