@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Documents List</title>
+</head>
+<body>
+<h1>Documents</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Created At</th>
+        <th>Edited At</th>
+        <th>Created By</th>
+        <th>Last Edited By</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="doc : ${documents}">
+        <td th:text="${doc.title}"></td>
+        <td th:text="${#temporals.format(doc.createdAt, 'dd-MM-yyyy HH:mm')}"></td>
+        <td th:text="${#temporals.format(doc.editedAt, 'dd-MM-yyyy HH:mm')}"></td>
+        <td th:text="${doc.createdBy}"></td>
+        <td th:text="${doc.editedBy}"></td>
+        <td>
+            <a th:href="@{/api/v1/documents/{id}(id=${doc.documentId})}">Edit</a>
+            <form th:action="@{/api/v1/documents/{id}/delete(id=${doc.documentId})}" method="post" style="display:inline;">
+<!--                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/api/v1/documents/new">Create New Document</a>
+</body>
+</html>

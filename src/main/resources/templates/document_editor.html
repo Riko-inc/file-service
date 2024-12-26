@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.12/css/froala_editor.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.12/js/froala_editor.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.12/css/plugins/table.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.12/css/plugins/image.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.12/css/plugins/video.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/plugins/colors.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/plugins/emoticons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/plugins/draggable.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.12/js/plugins/table.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.12/js/plugins/image.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.12/js/plugins/video.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.12/js/plugins/align.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/font_family.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/font_size.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/colors.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/emoticons.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins/draggable.min.js"></script>
+
+</head>
+<body>
+<h1>Edit Document</h1>
+<form th:action="@{/api/v1/documents/{id}(id=${document.documentId})}" method="post">
+    <input type="hidden" name="editor" value="Admin"/>
+
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" th:value="${document.title}" required />
+    </div>
+
+    <textarea id="editor" name="content" th:text="${document.content}"></textarea>
+    <button type="submit">Save</button>
+</form>
+
+<script>
+        new FroalaEditor('#editor', {
+        toolbarInline: false,
+        height: 500,
+        pluginsEnabled: [
+        'align', 'charCounter', 'codeBeautifier', 'codeView', 'colors',
+        'draggable', 'embedly', 'emoticons', 'file', 'fontFamily',
+        'fontSize', 'fullscreen', 'image', 'inlineClass', 'inlineStyle',
+        'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle',
+        'quote', 'save', 'table', 'url', 'video', 'wordPaste', 'markdown'
+        ],
+
+        // tableEditButtons: ['tableHeader', 'tableRemove', 'tableRows', 'tableColumns', 'tableCell', 'tableMerge'],
+
+        imageUpload: true,
+        imageUploadURL: '/upload_image',
+
+        fileUpload: true,
+        fileUploadURL: '/upload_file',
+
+        // Настройка тулбара
+        // toolbarButtons: [
+        // 'bold', 'italic', 'underline', 'strikeThrough', '|',
+        // 'formatOL', 'formatUL', '|', 'insertTable', 'insertImage',
+        // 'insertFile', 'insertLink', 'undo', 'redo', 'fullscreen'
+        // ],
+    });
+</script>
+</body>
+</html>
