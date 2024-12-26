@@ -54,6 +54,10 @@ jobs:
       - name: Run Tests
         run: mvn test
 
+      - name: Stop and Clean Up
+        if: always()
+        run: docker compose down
+
   deploy:
     name: Deploy and Test Application
     runs-on: ubuntu-latest
