@@ -33,11 +33,11 @@ public class WebSecurityConfig {
             "/upload_file/**",
             "/upload_image/**",
             "/api/v1/documents/**",
-
             "/api/v1/auth/**",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
+            "/actuator/**",
             "/swagger-resources",
             "/swagger-resources/**",
             "/configuration/ui",
