@@ -1,8 +1,10 @@
 package org.example.fileservice.domain.enities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,9 +28,6 @@ public class UserEntity implements UserDetails {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name="username", unique = true)
-    private String username;
-
     @Column(name="password", nullable = false)
     private String password;
 
@@ -44,13 +43,10 @@ public class UserEntity implements UserDetails {
     @Builder.Default
     private Role role = Role.USER;
 
-    @NotNull
-    @Builder.Default
-    private UserSettingsEntity settings = new UserSettingsEntity();
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="registration_date_time")
-    @Builder.Default
+    @Column(name = "registration_date_time", nullable = false)
+    @CreatedDate
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm", iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private final LocalDateTime registrationDateTime = LocalDateTime.now();
 
     @Override
@@ -65,7 +61,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.username;
+        return this.email;
     }
 
     @Override
