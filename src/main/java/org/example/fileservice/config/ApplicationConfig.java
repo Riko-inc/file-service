@@ -22,8 +22,8 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> repository.findByUsername(username)
-                .orElseThrow(() -> new UnauthorizedException("User with given username was not authorized"));
+        return email -> repository.findByEmail(email)
+                .orElseThrow(() -> new UnauthorizedException("User with given email was not authorized"));
     }
 
     @Bean

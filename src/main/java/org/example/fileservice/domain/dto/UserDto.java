@@ -1,9 +1,8 @@
 package org.example.fileservice.domain.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
 import org.example.fileservice.domain.enities.UserEntity;
 
 import java.time.LocalDateTime;
@@ -14,10 +13,11 @@ import java.time.LocalDateTime;
 @Builder
 public class UserDto {
     private Long userId;
-    private String username;
-    private String password;
-    private LocalDateTime registrationDateTime;
     private String email;
-    private boolean isActive;
+    private String password;
     private UserEntity.Role role;
+    @Schema(type = "string")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
+    private LocalDateTime registrationDateTime;
+    private boolean isActive;
 }

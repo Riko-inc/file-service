@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "documents")
+@Table(schema = "file-service", name = "documents")
 public class DocumentEntity {
     @Id
     @SequenceGenerator(name = "documents_seq", sequenceName = "documents_sequence")

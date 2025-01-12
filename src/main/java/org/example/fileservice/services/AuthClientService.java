@@ -12,4 +12,7 @@ public interface AuthClientService {
 
     @GetMapping("/extract-email")
     String extractEmail(@RequestHeader("Email") String email);
+
+    @GetMapping("check-email")
+    Boolean checkEmail(@RequestHeader("Email") String email);
 }
